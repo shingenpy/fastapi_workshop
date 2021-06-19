@@ -24,5 +24,5 @@ OpenAPI に基づいて作られている Python のフレームワークです�
 | 
 [home](https://github.com/shingenpy/fastapi_workshop) 
 | 
-[next topic]()
+[next topic](https://github.com/shingenpy/fastapi_workshop/tree/main/documents/02_why_fastapi)
 |

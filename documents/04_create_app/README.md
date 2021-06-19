@@ -107,9 +107,9 @@ http://localhost:8000/password/ にアクセスすると以下のようなレス
 次は作ったアプリを [Deta](https://www.deta.sh/?ref=fastapi) にデプロイします。
 
 | 
-[before topic]() 
+[before topic](https://github.com/shingenpy/fastapi_workshop/tree/main/documents/03_fastapi_details) 
 | 
 [home](https://github.com/shingenpy/fastapi_workshop) 
 | 
-[next topic]()
+[next topic](https://github.com/shingenpy/fastapi_workshop/tree/main/documents/05_deploy_app)
 |
