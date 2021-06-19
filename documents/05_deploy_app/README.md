@@ -18,7 +18,7 @@
 
 それぞれのファイルの内容は以下。
 
-main.py ← [前のトピック]()で作ったやつです。
+main.py ← [前のトピック](https://github.com/shingenpy/fastapi_workshop/tree/main/documents/04_create_app)で作ったやつです。
 ```
 import random, string
 from fastapi import FastAPI
@@ -109,9 +109,9 @@ $ deta new
 公式サイトにはほか様々なデプロイについても説明があるのでぜひ覗いてみてください。
 
 | 
-[before topic]() 
+[before topic](/documents/04_create_app) 
 | 
 [home](https://github.com/shingenpy/fastapi_workshop) 
 | 
-[next topic]()
+[next topic](/documents/06_ends)
 |

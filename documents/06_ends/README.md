@@ -7,7 +7,7 @@ FastAPI で作った作品、FastAPI で作りたい作品を LT の形式で発
 みんなが作った作品が気になる！って方も是非見に来てください。
 
 | 
-[before topic]() 
+[before topic](/documents/05_deploy_app) 
 | 
 [home](https://github.com/shingenpy/fastapi_workshop) 
 | 

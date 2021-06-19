@@ -82,9 +82,9 @@ if __name__ == "__main__":
 ```    
 
 | 
-[before topic]() 
+[before topic](/documents/01_about_fastapi) 
 | 
 [home](https://github.com/shingenpy/fastapi_workshop) 
 | 
-[next topic]()
+[next topic](/documents/03_fastapi_details)
 |

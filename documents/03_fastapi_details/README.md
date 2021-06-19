@@ -74,7 +74,7 @@ async def update_item(
     return results ← return で返す値は実際のレスポンスの値です。
 ```
 
-# 1. 対応している HTTP メソッド
+# 1. HTTP Method
 基本的な HTTP メソッドはサポートしている
 * post
 * get 
@@ -111,7 +111,7 @@ def hello4():
 $ uvicorn sample01:app --reload 
 ```
 
-# 2. 各種パラメータ関連
+# 2. Parameters
 ## パスパラメータ
 パスパラメータとは、```http://〇〇.com/xxx/``` の xxx の部分などのことを言います。<br>
 指定する際は、以下のサンプルコードのように @app.get("/path/{number}") の {} の中に入れた変数がパスパラメータになります。<br>
@@ -206,7 +206,7 @@ def cookie_param(user_id: Optional[str] = Cookie(None)):
     return {"user_id": user_id}
 ```
 
-# 3. 対応しているデータ型
+# 3. About Data Types
 エディターサポートやデータバリデーションに対応しているデータ型の紹介
 * 基本的なデータ型
     * int
@@ -225,7 +225,7 @@ def cookie_param(user_id: Optional[str] = Cookie(None)):
 
 * pydantic オブジェクトの場合はこちら ⇒ [link](https://pydantic-docs.helpmanual.io/usage/types/)
 
-# 4. データのバリデーションについて
+# 4. About Validation
 ## 型ヒントによるバリデーション
 
 Python には型ヒントという機能がありますが、FastAPI で使うとバリデーションの効果があります。
@@ -283,7 +283,7 @@ from fastapi import Query
 def validate_many(id: int = Path(..., ge=0),q: str = Query(..., regex="^sample.+")):
     return {"id": id, "q": q}
 ```
-# 4. レスポンス
+# 5. About Response
 ## レスポンスモデル
 例えば以下のサンプルコードのような場合は、レスポンスの際に与えたデータがそのまま帰ってきてしまいます。
 ```
@@ -333,7 +333,7 @@ app = FastAPI()
 def status_404():
     return {"msg": "status 404"}
 ```
-# 5. テスト
+# 6. Test
 FastAPI のテストは簡単です。FastAPI には専用のテストクライアントが付属しています。
 テストを行う際は pip コマンドで requests と pytest をインストールしましょう。
 
@@ -377,7 +377,7 @@ test_sample.py では以下の処理を行っています。
 
 ※このテストは成功してしまいますので、テストコードの 9 行目の msg を変更してテストが失敗するように確かめてみましょう。
 
-# その他
+# 7. other
 ## 依存関係の注入
 主に以下を目的で使う機能です。
 * ロジックの共有 (リクエストのたびに同じロジックを何度も実行するなど)
@@ -443,9 +443,9 @@ SQLAlchemy を使う
 * https://fastapi.tiangolo.com/ja/tutorial/sql-databases/
 
 | 
-[before topic]() 
+[before topic](/documents/02_why_fastapi) 
 | 
 [home](https://github.com/shingenpy/fastapi_workshop) 
 | 
-[next topic]()
+[next topic](/documents/04_create_app)
 |
