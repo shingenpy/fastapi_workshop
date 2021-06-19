@@ -443,9 +443,9 @@ SQLAlchemy を使う
 * https://fastapi.tiangolo.com/ja/tutorial/sql-databases/
 
 | 
-[before topic](https://github.com/shingenpy/fastapi_workshop/tree/main/documents/02_why_fastapi) 
+[before topic](/documents/02_why_fastapi) 
 | 
 [home](https://github.com/shingenpy/fastapi_workshop) 
 | 
-[next topic](https://github.com/shingenpy/fastapi_workshop/tree/main/documents/04_create_app)
+[next topic](/documents/04_create_app)
 |

@@ -109,9 +109,9 @@ $ deta new
 公式サイトにはほか様々なデプロイについても説明があるのでぜひ覗いてみてください。
 
 | 
-[before topic](https://github.com/shingenpy/fastapi_workshop/tree/main/documents/04_create_app) 
+[before topic](/documents/04_create_app) 
 | 
 [home](https://github.com/shingenpy/fastapi_workshop) 
 | 
-[next topic](https://github.com/shingenpy/fastapi_workshop/tree/main/documents/06_ends)
+[next topic](/documents/06_ends)
 |
