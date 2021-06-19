@@ -117,6 +117,7 @@ $ uvicorn sample01:app --reload
 指定する際は、以下のサンプルコードのように @app.get("/path/{number}") の {} の中に入れた変数がパスパラメータになります。<br>
 パスパラメータは指定したら、関数の変数としても宣言します。
 
+sample02_01.py
 ```
 from fastapi import FastAPI
 app = FastAPI()
@@ -129,8 +130,11 @@ def path_param(number: int):
 ## クエリーパラメータ
 クエリーパラメータとは、```http://〇〇.com/?id=xxx``` の ? に続く **id=xxx** の部分がクエリーパラメータです。<br>
 宣言する際は、関数の引数に宣言するだけです。(パスパラメータやその他パラメータと変数名はかぶってはダメ)
+
+sample02_02.py
 ```
 from fastapi import FastAPI
+app = FastAPI()
 
 @app.get("/query/")
 def query_param(number: int):
@@ -138,9 +142,13 @@ def query_param(number: int):
 ```
 ちなみに、クエリーパラメータをオプションパラメータとしたい場合は初期値を None とする。
 なお、テスト等を容易にするために Optional というモジュールを使って宣言することが推奨されています。(q: int = None と書いても同じ意味です。)
+
+sample02_03.py
 ```
 from fastapi import FastAPI
 from typing import Optional
+
+app = FastAPI()
 
 @app.get("/query2/")
 def query2_param(number: int, q: Optional[int] = None):
@@ -154,9 +162,12 @@ def query2_param(number: int, q: Optional[int] = None):
 一つ目は Pydantic オブジェクトで作成する方法です。<br>
 まずは、pydantic の BaseModel を継承したクラスに name や age などのパラメータを与えてモデルを宣言する。<br>
 FastAPI からは、関数の引数に作成したモデルクラスを型ヒントのタイプを指定するところに書くことでボディパラメータとして認識されます。(human: int と書いた場合はクエリーパラメータとして判別されます。) 
+
+sample02_04.py
 ```
 from fastapi import FastAPI
 from pydantic import BaseModel
+app = FastAPI()
 
 class Human(BaseModel):
     name: str
@@ -170,9 +181,12 @@ def body_param(human: Human):
 fastapi の Body モジュールを使用して宣言します。<br>
 使用方法はサンプルコードのまんまです。<br>
 詳しくは ⇒ [こちら](https://fastapi.tiangolo.com/ja/tutorial/body-multiple-params/#singular-values-in-body)
+
+sample02_05.py
 ```
 from fastapi import FastAPI
 from fastapi import Body
+app = FastAPI()
 
 @app.put("/body2/")
 def body2_param(number: int = Body(...)):
@@ -182,7 +196,17 @@ def body2_param(number: int = Body(...)):
 ## パラメータの判別
 FastAPI は複数宣言されたパラメータを判別することができます。<br>
 以下のサンプルコードは number, human, q とそれぞれ、number はパスパラメータ、human はボディパラメータ、q はクエリパラメータと判別します。
+
+sample02_06.py
 ```
+from fastapi import FastAPI
+from pydantic import BaseModel
+app = FastAPI()
+
+class Human(BaseModel):
+    name: str
+    age: int
+
 @app.put("/many/{number}")
 def many_param(number: int, human: Human, q: int):
     return {"number": number, "human": human, "q": q}
@@ -191,7 +215,13 @@ def many_param(number: int, human: Human, q: int):
 ### ヘッダーパラメータ
 * Header パラメータを宣言する場合は FastAPI の Header モジュールを使う。
 * FastAPI でHeader を扱う場合は - (ハイフン)と _ (アンダースコア)を相互変換する処理が働きます。Python では、変数宣言に - を扱えないためです。(無効にすることもできます。)
+
+sample02_07.py
 ```
+from fastapi import FastAPI
+from typing import Optional
+app = FastAPI()
+
 from fastapi import Header
 @app.get("/header/")
 def header_param(user_agent: Optional[str] = Header(None)):
@@ -199,7 +229,13 @@ def header_param(user_agent: Optional[str] = Header(None)):
 ```
 ### Cookie パラメータ
 * Cookie パラメータを宣言するには、FastAPI の Cookie モジュールを使います。
+
+sample02_08.py
 ```
+from fastapi import FastAPI
+from typing import Optional
+app = FastAPI()
+
 from fastapi import Cookie
 @app.get("/cookie/")
 def cookie_param(user_id: Optional[str] = Cookie(None)):
@@ -231,7 +267,7 @@ def cookie_param(user_id: Optional[str] = Cookie(None)):
 Python には型ヒントという機能がありますが、FastAPI で使うとバリデーションの効果があります。
 
 以下、型ヒントなしとありのサンプルコードを用意しましたが、型ヒント無しの場合は数値でも文字列でもエラーはでません。
-* 型ヒントなし
+* 型ヒントなし → sample04_01.py
 ```
 from fastapi import FastAPI 
 
@@ -241,7 +277,7 @@ app = FastAPI()
 def hintoff(number):
     return {"number": number}
 ```
-* 型ヒントあり
+* 型ヒントあり → sample04_02.py
 ```
 from fastapi import FastAPI 
 
@@ -271,6 +307,8 @@ def hinton(number: int):
 
 下記、サンプルコードのようにそれぞれのパラメータようにパスパラメータの場合は Path モジュールのように対応したものを使う。<br>
 サンプルコードではパスパラメータ id は 0 以上の数値、クエリーパラメータの q は sample が最初につく文字列をそれぞれパラメータとして与えた場合にアクセスが通るようになります。
+
+sample04_03.py
 ```
 from fastapi import FastAPI 
 
@@ -286,6 +324,8 @@ def validate_many(id: int = Path(..., ge=0),q: str = Query(..., regex="^sample.+
 # 5. About Response
 ## レスポンスモデル
 例えば以下のサンプルコードのような場合は、レスポンスの際に与えたデータがそのまま帰ってきてしまいます。
+
+sample05_01.py
 ```
 from fastapi import FastAPI 
 from pydantic import BaseModel
@@ -302,6 +342,8 @@ def signup(user: UserIn):
 ```
 password が平文のまま帰ってくるのはちょっと嫌な気がします。<br>
 FastAPI では、レスポンスの際のモデルを指定することでそれを解決します。
+
+sample05_02.py
 ```
 from fastapi import FastAPI 
 from pydantic import BaseModel
@@ -324,6 +366,8 @@ def signup(user: UserIn):
 
 ## レスポンスのステータスコード
 ステータスコードを指定できます。以下のコードの status_code がその役割です。
+
+sample05_03.py
 ```
 from fastapi import FastAPI 
 
@@ -385,6 +429,8 @@ test_sample.py では以下の処理を行っています。
 * アクセス制限、ロール管理など
 
 ロジックの共有のサンプル
+
+sample07_01.py
 ```
 from typing import Optional
 from fastapi import FastAPI
@@ -406,6 +452,8 @@ async def read_users(commons: dict = Depends(common_parameters)):
 上記のサンプルコードでは、重複するパラメータを持つ例です。common_parameters という関数に宣言した引数が、read_items と read_users でそのまま使われます。
 
 アクセス制限などのサンプルコード(あくまでサンプル!)
+
+sample07_02.py
 ```
 from fastapi import FastAPI
 from fastapi import Depends

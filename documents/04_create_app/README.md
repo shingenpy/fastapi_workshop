@@ -5,8 +5,9 @@ windows においての Python 環境の構築方法のおすすめ
 1. scoop のインストール
 1. scoop で python と Visual Studio Code をインストール
 
+※ scoop とは windows のパッケージマネージャーです。
 ### scoop のインストール
-[参照](https://scoop.sh/)
+[scoop.sh](https://scoop.sh/)
 
 1. PowerShell を起動
 1. PowerShell 以下を実行する
